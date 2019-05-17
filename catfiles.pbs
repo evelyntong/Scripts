@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -q home-alexandrov
+#PBS -l nodes=1:ppn=28:skylake
+#PBS -l walltime=120:00:00
+#PBS -m bea
+#PBS -M yutong@ucsd.edu
+#PBS -o catfiles.o
+#PBS -e catfiles.e
+#PBS -N catfiles
+#PBS -V
+
+
+cd /restricted/alexandrov-group/shared/precancer_analysis/tissue_types/breast/23568837_west_breast
+cat catlist* |while read f{1..15}; do cat ${f2}_1.fastq.gz ${f3}_1.fastq.gz ${f4}_1.fastq.gz ${f5}_1.fastq.gz ${f6}_1.fastq.gz ${f7}_1.fastq.gz ${f8}_1.fastq.gz ${f9}_1.fastq.gz ${f10}_1.fastq.gz ${f11}_1.fastq.gz ${f12}_1.fastq.gz ${f13}_1.fastq.gz ${f14}_1.fastq.gz ${f15}_1.fastq.gz > combined/${f1}_1.fastq.gz;done
+cat catlist* |while read f{1..15}; do cat ${f2}_2.fastq.gz ${f3}_2.fastq.gz ${f4}_2.fastq.gz ${f5}_2.fastq.gz ${f6}_2.fastq.gz ${f7}_2.fastq.gz ${f8}_2.fastq.gz ${f9}_2.fastq.gz ${f10}_2.fastq.gz ${f11}_2.fastq.gz ${f12}_2.fastq.gz ${f13}_2.fastq.gz ${f14}_2.fastq.gz ${f15}_2.fastq.gz > combined/${f1}_2.fastq.gz;done

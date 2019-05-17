@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -q home-alexandrov
+#PBS -l nodes=1:ppn=28:skylake
+#PBS -l walltime=120:00:00
+#PBS -m bea
+#PBS -M yutong@ucsd.edu
+#PBS -o sam.o
+#PBS -e sam.e
+#PBS -N sam
+#PBS -V
+
+cd /home/yutong/tissue_types_shared_restr/brain/23334667_brastianos_brain/1Mreads
+
+cat SRRlist |while read line; do bwa aln -t 24 bwa_index/hg19.fasta ${line}_1.fastq_1M >${line}_1.fastq_1M.sai 2> error/${line}_1.fastq_1M.bwa.err;done
+
+cat SRRlist |while read line; do bwa aln -t 24 bwa_index/hg19.fasta ${line}_2.fastq_1M >${line}_2.fastq_1M.sai 2> error/${line}_2.fastq_1M.bwa.err;done
+
+cat SRRlist |while read line; do bwa sampe bwa_index/hg19.fasta \
+${line}_1.fastq_1M.sai \
+${line}_2.fastq_1M.sai \
+${line}_1.fastq_1M \
+${line}_2.fastq_1M \
+1>results/${line}_12_1Mreads.sam 2> error/${line}_12_1Mreads.err; done
+
