@@ -22,3 +22,7 @@ ${line}_1.fastq_1M \
 ${line}_2.fastq_1M \
 1>results/${line}_12_1Mreads.sam 2> error/${line}_12_1Mreads.err; done
 
+cd results
+
+cat ../../SRRlist |while read line; do echo "$line" $(samtools stats -i 1000 ${line}_12_1Mreads.sam | grep ^IS | cut -f 2- | sort -nrk3 | head -n1) >> insert_size
+;done
