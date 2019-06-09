@@ -1,0 +1,3 @@
+# resubmit jobs
+
+cat [resubmit.txt] | while read f{1..5}; do ConVarCaller.py restart \ [directory] \ ${f1}; done
